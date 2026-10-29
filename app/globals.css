@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* Design tokens (PLAN.md bagian 5) */
+:root {
+  --bg: #0a0a0b;
+  --surface: #141416;
+  --line: #2a2a2e;
+  --red: #e5252a;
+  --red-deep: #8f1217;
+  --bone: #ece6d8;
+  --muted: #9a958a;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-red: var(--red);
+  --color-red-deep: var(--red-deep);
+  --color-bone: var(--bone);
+  --color-muted: var(--muted);
+
+  --font-display: var(--font-display), "Bebas Neue", Impact, sans-serif;
+  --font-body: var(--font-body), Georgia, serif;
+  --font-label: var(--font-label), ui-monospace, monospace;
+  --font-jp: var(--font-jp), serif;
+}
+
+html {
+  scroll-padding-top: 5rem;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--bone);
+  font-family: var(--font-body), Georgia, serif;
+}
+
+::selection {
+  background: var(--red);
+  color: var(--bone);
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
