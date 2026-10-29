@@ -192,7 +192,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         .to(q(".hero-aura"), { opacity: 0, duration: 0.9, ease: "power1.out" }, "split");
 
       // 5. AFTERMATH: retakan gelap dan teks 闇魔法 muncul lalu memudar. Garis tebasan
-      // meredup ke keadaan diam yang tipis supaya teks hero tetap nyaman dibaca.
+      // memudar sepenuhnya sehingga hero kembali bersih.
       tl.addLabel("aftermath", "split+=0.5")
         .to(
           q("[data-fx=crack]"),
@@ -207,8 +207,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         )
         .to(q("[data-fx=kanji]"), { opacity: 0, duration: 1.2, ease: "power1.in" }, "aftermath+=1")
         .to(q("[data-fx=crack]"), { opacity: 0, duration: 1.2, ease: "power1.in" }, "aftermath+=1")
-        .to(core, { opacity: 0.3, duration: 1.2, ease: "power1.out" }, "aftermath+=0.8")
-        .to(glow, { opacity: 0.5, duration: 1.2, ease: "power1.out" }, "aftermath+=0.8");
+        .to([core, glow], { opacity: 0, duration: 1.0, ease: "power1.out" }, "aftermath+=0.6");
 
       return () => {
         tlRef.current = null;

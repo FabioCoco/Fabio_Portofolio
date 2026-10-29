@@ -15,7 +15,7 @@ export function About() {
   return (
     <section aria-labelledby="about" className="px-5 py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading id="about" title="Captain's Notes" subtitle="Tentang saya" />
+        <SectionHeading id="about" title="Tentang Saya" subtitle="Profil" />
         <div className={`grid gap-10 ${profile.photo ? "md:grid-cols-[1fr_16rem]" : ""}`}>
           <div data-reveal className="space-y-8">
             <div className="space-y-4 text-lg leading-relaxed">

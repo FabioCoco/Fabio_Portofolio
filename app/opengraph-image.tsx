@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { profile } from "@/content/profile";
 
-export const alt = "Black Bulls Member File";
+export const alt = "Portfolio Fabio Francisco";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default function OpenGraphImage() {
           }}
         />
         <div style={{ fontSize: 26, letterSpacing: 8, color: "#9a958a" }}>
-          PORTFOLIO / BLACK BULLS
+          PORTFOLIO / FABIO FRANCISCO
         </div>
         <div style={{ fontSize: 110, fontWeight: 900, marginTop: 24, lineHeight: 1 }}>
           {profile.name.toUpperCase()}

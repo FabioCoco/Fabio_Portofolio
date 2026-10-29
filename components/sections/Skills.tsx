@@ -6,7 +6,7 @@ export function Skills() {
   return (
     <section aria-labelledby="skills" className="px-5 py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading id="skills" title="Mana Stats" subtitle="Skill" />
+        <SectionHeading id="skills" title="Keahlian" subtitle="Skill" />
         <div className="grid gap-5 md:grid-cols-3">
           {skills.map((g) => (
             <div key={g.group} data-reveal className="border border-line bg-surface p-5">

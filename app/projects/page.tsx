@@ -28,10 +28,10 @@ export default function ProjectsPage() {
 
           <header className="mb-12 mt-12">
             <p className="flex items-center gap-3 font-label text-xs uppercase tracking-[0.3em] text-muted">
-              Index
+              Portofolio
               <Clover className="h-3.5 w-3.5 text-accent" />
               <span aria-hidden="true" className="h-px w-10 bg-line" />
-              {projects.length} misi di dalam berkas
+              {projects.length} project
             </p>
             <h1 className="mt-4 font-display text-7xl uppercase leading-none tracking-wide sm:text-9xl">
               Projects

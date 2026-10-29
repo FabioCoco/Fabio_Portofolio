@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Anton, Crimson_Pro, JetBrains_Mono, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/content/profile";
+import { Ambient } from "@/components/ui/Ambient";
 import { CommandPalette } from "@/components/ui/CommandPalette";
 import { SlashCursor } from "@/components/ui/SlashCursor";
 
@@ -31,23 +32,23 @@ const jp = Noto_Serif_JP({
 
 // TODO: set NEXT_PUBLIC_SITE_URL ke domain asli (mis. https://namaanda.vercel.app) saat deploy.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const description = `Portofolio ${profile.name}, mahasiswa ${profile.major}. Project dan sertifikat. Fan tribute bertema Black Clover.`;
+const description = `Portofolio ${profile.name}, mahasiswa ${profile.major}. Project, sertifikat, dan kontak.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: `${profile.name} | Black Bulls Member File`, template: `%s | ${profile.name}` },
+  title: { default: `${profile.name} | Portfolio`, template: `%s | ${profile.name}` },
   description,
   openGraph: {
     type: "website",
     locale: "id_ID",
-    siteName: "Black Bulls Member File",
-    title: `${profile.name} | Black Bulls Member File`,
+    siteName: "Portfolio",
+    title: `${profile.name} | Portfolio`,
     description,
   },
   twitter: { card: "summary_large_image" },
 };
 
-export const viewport: Viewport = { themeColor: "#0a0a0b" };
+export const viewport: Viewport = { themeColor: "#f3eee2" };
 
 // Menerapkan tema tersimpan sebelum paint agar tidak berkedip. Default: Night.
 const themeScript = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
@@ -56,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="id"
-      data-theme="dark"
+      data-theme="light"
       suppressHydrationWarning
       className={`${display.variable} ${body.variable} ${label.variable} ${jp.variable} h-full antialiased`}
     >
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Lewati ke konten
         </a>
+        <Ambient />
         {children}
         <CommandPalette />
         <SlashCursor />

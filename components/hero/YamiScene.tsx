@@ -1,5 +1,5 @@
 // Siluet pendekar original (Tier A) untuk hero. Bukan replika artwork resmi:
-// pendekar berjubah hitam, ikat kepala, katana melengkung, kuda-kuda menebas, mata/seringai merah.
+// pendekar berjubah hitam, ikat kepala, katana melengkung, kuda-kuda menebas, mata merah.
 // Menghadap kiri: katana terangkat di belakang kepala, lalu menebas turun ke kiri-bawah
 // (searah garis tebasan hero). Id grup dipakai oleh timeline GSAP di HeroStage:
 // hero-figure > hero-cape, hero-leg-*, hero-torso > hero-arm (lengan + katana + aura), hero-head.
@@ -32,10 +32,6 @@ export function YamiScene() {
 
       {/* Lingkaran merah redup di belakang karakter */}
       <circle id="hero-moon" cx="230" cy="290" r="205" fill="url(#moon)" />
-
-      {/* Tanah dan bayangan */}
-      <path d="M20 566 H440" stroke="#2a2a2e" strokeWidth="2" />
-      <ellipse cx="230" cy="568" rx="150" ry="8" fill="#000" opacity="0.6" />
 
       <g
         id="hero-figure"
@@ -127,7 +123,6 @@ export function YamiScene() {
             <path d="M232 158 C258 150 280 160 300 150 L286 170 C268 168 252 172 233 166 Z" strokeWidth="1.2" />
             <g id="hero-eye" fill="none" stroke="#e5252a" strokeLinecap="round">
               <path d="M178 176 L194 172" strokeWidth="3" />
-              <path d="M174 190 Q188 198 202 188" strokeWidth="2" />
             </g>
           </g>
         </g>

@@ -51,7 +51,6 @@ html {
 }
 
 body {
-  background: var(--bg);
   color: var(--bone);
   font-family: var(--font-body), Georgia, serif;
 }
@@ -84,13 +83,10 @@ body {
   stroke-dashoffset: 0;
 }
 
-/* Keadaan diam (setelah animasi / reduced-motion): tipis agar teks hero tetap terbaca */
-.fx-slash-core {
-  opacity: 0.3;
-}
-
+/* Keadaan diam (setelah animasi / reduced-motion): garis tidak ditampilkan */
+.fx-slash-core,
 .fx-slash-glow {
-  opacity: 0.5;
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -99,47 +95,162 @@ body {
   }
 }
 
-/* Garis pada pemisah diagonal antar section (digambar saat scroll bila animasi diizinkan) */
-.fx-draw {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .fx-draw {
-    stroke-dashoffset: 1;
-  }
-}
-
-/* Hover kartu project/sertifikat: garis tebasan merah menyapu diagonal kartu */
-.slash-card {
+/* Kartu interaktif: terangkat sedikit, border menyala, dan cahaya lembut mengikuti kursor */
+.fx-card {
   position: relative;
   overflow: hidden;
-  transition: border-color 0.2s;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s,
+    box-shadow 0.25s;
 }
 
-.slash-card::after {
+.fx-card::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    to top left,
-    transparent calc(50% - 1px),
-    var(--red) calc(50% - 1px),
-    var(--red) calc(50% + 1px),
-    transparent calc(50% + 1px)
+  opacity: 0;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--red) 22%, transparent),
+    transparent 65%
   );
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 0.3s;
 }
 
-.slash-card:hover,
-.slash-card:focus-within {
+.fx-card:hover,
+.fx-card:focus-within {
+  transform: translateY(-4px);
   border-color: var(--red-deep);
+  box-shadow: 0 14px 32px -16px color-mix(in srgb, var(--red) 55%, transparent);
 }
 
-.slash-card:hover::after,
-.slash-card:focus-within::after {
-  clip-path: inset(0 0 0 0);
+.fx-card:hover::before,
+.fx-card:focus-within::before {
+  opacity: 1;
+}
+
+/* Latar bergerak pelan: tiga cahaya merah redup yang melayang + pola titik halus */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ambient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--bone) 9%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 0%, transparent 75%);
+}
+
+.ambient-orb {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--red) 30%, transparent), transparent 68%);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+:root[data-theme="light"] .ambient-orb {
+  opacity: 0.35;
+}
+
+.ambient-orb:nth-child(1) {
+  top: -14vmax;
+  left: -10vmax;
+  animation: drift-a 38s ease-in-out infinite alternate;
+}
+
+.ambient-orb:nth-child(2) {
+  top: 35vh;
+  right: -18vmax;
+  width: 40vmax;
+  height: 40vmax;
+  opacity: 0.4;
+  animation: drift-b 46s ease-in-out infinite alternate;
+}
+
+.ambient-orb:nth-child(3) {
+  bottom: -20vmax;
+  left: 20vw;
+  width: 36vmax;
+  height: 36vmax;
+  opacity: 0.35;
+  animation: drift-c 52s ease-in-out infinite alternate;
+}
+
+@keyframes drift-a {
+  to {
+    transform: translate3d(22vw, 16vh, 0) scale(1.15);
+  }
+}
+
+@keyframes drift-b {
+  to {
+    transform: translate3d(-24vw, -14vh, 0) scale(0.9);
+  }
+}
+
+@keyframes drift-c {
+  to {
+    transform: translate3d(18vw, -20vh, 0) scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb {
+    animation: none;
+  }
+}
+
+/* Partikel halus yang naik pelan (bintik debu/serbuk cahaya). Sengaja kecil dan jarang. */
+.ambient-dot {
+  position: absolute;
+  bottom: -2rem;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--red) 55%, transparent);
+  opacity: 0;
+  animation: rise var(--t) linear var(--d) infinite;
+  will-change: transform, opacity;
+}
+
+.ambient-dot:nth-child(3n) {
+  background: color-mix(in srgb, var(--bone) 40%, transparent);
+}
+
+@keyframes rise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(2.2rem, -55vh, 0);
+  }
+  88% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(-1.6rem, -112vh, 0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-dot {
+    display: none;
+  }
 }

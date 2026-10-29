@@ -21,9 +21,10 @@ type Command = { id: string; group: string; label: string; run: () => void };
 // Section di beranda (scroll)
 const SECTIONS = [
   { id: "top", label: "Beranda" },
-  { id: "about", label: "About (Captain's Notes)" },
-  ...(skills.length > 0 ? [{ id: "skills", label: "Skills (Mana Stats)" }] : []),
-  { id: "contact", label: "Contact (Join the Squad)" },
+  { id: "fokus", label: "Fokus belajar (Mandarin & MongoDB)" },
+  { id: "about", label: "Tentang saya" },
+  ...(skills.length > 0 ? [{ id: "skills", label: "Keahlian" }] : []),
+  { id: "contact", label: "Kontak" },
 ];
 
 export function CommandPalette() {
@@ -31,7 +32,7 @@ export function CommandPalette() {
   const input = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const pathname = usePathname();
-  const theme = useSyncExternalStore<Theme>(subscribe, getTheme, () => "dark");
+  const theme = useSyncExternalStore<Theme>(subscribe, getTheme, () => "light");
   const cursorOn = useSyncExternalStore(subscribe, getCursorOn, () => true);
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);

@@ -1,8 +1,7 @@
 export const profile = {
   name: "Fabio Francisco",
   copyrightYear: 2026, // TODO: perbarui tiap tahun
-  tagline: "限界を、斬り開け",
-  taglineEn: "Cut through your limits.",
+  tagline: "Membangun solusi teknologi yang rapi dan berguna.",
   summary:
     "Mahasiswa Informatics Engineering di Universitas Tarumanagara yang tertarik pada teknologi dan AI.",
   university: "Universitas Tarumanagara",

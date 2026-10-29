@@ -10,7 +10,7 @@ import { ENABLE_SMOOTH_SCROLL, NO_REDUCED_MOTION, REVEAL } from "@/lib/motion";
 /**
  * Efek scroll global (Fase 4), tidak merender apa pun:
  * - reveal elemen `[data-reveal]` saat masuk layar
- * - menggambar garis `[data-slash-draw]` pada transisi diagonal antar section
+ * - cahaya kartu yang mengikuti kursor
  * - scroll halus Lenis (opsional, lihat lib/motion.ts)
  * Semuanya hanya aktif bila prefers-reduced-motion = no-preference; kalau tidak,
  * konten tampil apa adanya.
@@ -24,7 +24,7 @@ export function ScrollEffects() {
       let tick: ((time: number) => void) | null = null;
 
       if (ENABLE_SMOOTH_SCROLL) {
-        lenis = new Lenis({ anchors: { offset: -80 } });
+        lenis = new Lenis({ anchors: { offset: -80 }, duration: 1 });
         setLenis(lenis);
         lenis.on("scroll", ScrollTrigger.update);
         tick = (time) => lenis?.raf(time * 1000);
@@ -49,15 +49,15 @@ export function ScrollEffects() {
           }),
       });
 
-      // Garis tebasan pada pemisah diagonal antar section.
-      gsap.utils.toArray<SVGPathElement>("[data-slash-draw]").forEach((path) => {
-        gsap.to(path, {
-          strokeDashoffset: 0,
-          duration: 0.6,
-          ease: "power3.in",
-          scrollTrigger: { trigger: path, start: "top 92%", once: true },
-        });
-      });
+      // Cahaya kartu mengikuti kursor (diatur lewat variabel CSS --mx/--my).
+      const onMove = (e: PointerEvent) => {
+        const card = (e.target as Element | null)?.closest<HTMLElement>(".fx-card");
+        if (!card) return;
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        card.style.setProperty("--my", `${e.clientY - r.top}px`);
+      };
+      document.addEventListener("pointermove", onMove, { passive: true });
 
       // Tinggi halaman berubah setelah font termuat.
       let cancelled = false;
@@ -67,6 +67,7 @@ export function ScrollEffects() {
 
       return () => {
         cancelled = true;
+        document.removeEventListener("pointermove", onMove);
         if (tick) gsap.ticker.remove(tick);
         lenis?.destroy();
         setLenis(null);

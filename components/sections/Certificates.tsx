@@ -12,8 +12,8 @@ export function Certificates() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           id="certificates"
-          title="Grimoire Pages"
-          subtitle="Sertifikat"
+          title="Sertifikat"
+          subtitle="Kredensial"
           action={{ href: "/certificates", label: "Lihat semua sertifikat →" }}
         />
         <ul className="grid gap-5 lg:grid-cols-2">

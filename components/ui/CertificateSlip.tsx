@@ -15,7 +15,7 @@ export function CertificateSlip({ cert, index }: { cert: Certificate; index: num
   const link =
     "font-label text-xs uppercase tracking-[0.15em] text-accent underline underline-offset-4 hover:text-bone";
   return (
-    <li data-reveal className="slash-card flex border border-line bg-surface">
+    <li data-reveal className="fx-card flex border border-line bg-surface">
       <div className="flex w-24 shrink-0 flex-col items-center justify-center gap-3 px-2 py-5 sm:w-28">
         <span
           aria-hidden="true"

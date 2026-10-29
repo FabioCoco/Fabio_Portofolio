@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import { getTheme, setTheme, subscribe, type Theme } from "@/lib/prefs";
 
 export function ThemeToggle() {
-  const theme = useSyncExternalStore<Theme>(subscribe, getTheme, () => "dark");
+  const theme = useSyncExternalStore<Theme>(subscribe, getTheme, () => "light");
   const next: Theme = theme === "dark" ? "light" : "dark";
 
   return (

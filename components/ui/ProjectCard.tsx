@@ -10,7 +10,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
   const link = "text-accent underline underline-offset-4 hover:text-bone";
   const corner = "flex flex-col items-center font-display text-xl leading-none";
   return (
-    <li data-reveal className="slash-card border border-line bg-surface p-1.5">
+    <li data-reveal className="fx-card border border-line bg-surface p-1.5">
       <div className="relative flex h-full flex-col border border-line px-5 pb-12 pt-12">
         <span className={`absolute left-3 top-3 ${corner}`}>
           {num}

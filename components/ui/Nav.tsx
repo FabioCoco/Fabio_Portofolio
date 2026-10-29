@@ -17,7 +17,7 @@ export function Nav({ home = true, current }: { home?: boolean; current?: Curren
     >
       <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-5 py-3">
         <Link href="/" className="font-display text-xl uppercase tracking-wide">
-          Black <span className="text-accent">Bulls</span>
+          Fabio <span className="text-accent">Francisco</span>
         </Link>
         <ul className="order-3 flex w-full flex-wrap gap-x-4 gap-y-1 font-label text-[0.7rem] uppercase tracking-[0.15em] text-muted sm:order-none sm:w-auto sm:gap-x-6 sm:text-xs">
           <li>

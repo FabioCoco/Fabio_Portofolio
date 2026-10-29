@@ -33,10 +33,9 @@ export function Hero() {
           <p className="mt-5 font-label text-xs uppercase tracking-[0.2em] text-muted">
             {profile.major} · {profile.university} · {profile.location}
           </p>
-          <p lang="ja" className="mt-8 font-jp text-2xl font-semibold text-accent sm:text-3xl">
+          <p className="mt-8 font-display text-2xl uppercase tracking-wide text-accent sm:text-3xl">
             {profile.tagline}
           </p>
-          <p className="font-label text-xs text-muted">{profile.taglineEn}</p>
           <ul className="mt-8 flex flex-wrap gap-3 font-label text-xs uppercase tracking-[0.15em]">
             <li>
               <Link

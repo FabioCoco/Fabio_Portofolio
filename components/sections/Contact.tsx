@@ -8,7 +8,7 @@ export function Contact() {
   return (
     <section aria-labelledby="contact" className="px-5 py-16">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading id="contact" title="Join the Squad" subtitle="Kontak" />
+        <SectionHeading id="contact" title="Hubungi Saya" subtitle="Kontak" />
         <p data-reveal className="max-w-xl text-lg leading-relaxed">
           Terbuka untuk magang, kolaborasi, dan ngobrol soal teknologi. Hubungi saya lewat:
         </p>

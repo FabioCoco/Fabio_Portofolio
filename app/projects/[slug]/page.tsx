@@ -122,7 +122,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               className="mt-12 block border border-line p-5 hover:border-red"
             >
               <span className="font-label text-xs uppercase tracking-[0.2em] text-muted">
-                Misi berikutnya →
+                Project berikutnya →
               </span>
               <span className="mt-1 block font-display text-2xl uppercase tracking-wide">
                 {next.title}

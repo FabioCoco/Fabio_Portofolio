@@ -11,8 +11,8 @@ export function Work() {
       <div className="mx-auto max-w-5xl">
         <SectionHeading
           id="work"
-          title="Mission Log"
-          subtitle="Project terpilih"
+          title="Project"
+          subtitle="Karya pilihan"
           action={{ href: "/projects", label: "Lihat semua project →" }}
         />
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
