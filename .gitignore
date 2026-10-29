@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# data mentah pribadi (belum dikurasi)
+# data mentah pribadi 
 /isi-konten
