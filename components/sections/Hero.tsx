@@ -1,17 +1,14 @@
 import { profile } from "@/content/profile";
+import { HeroStage } from "@/components/hero/HeroStage";
 import { SlashLine } from "@/components/hero/SlashLine";
 import { YamiScene } from "@/components/hero/YamiScene";
 
-// Hero statis (Fase 2). Animasi tebasan dikerjakan di Fase 3.
+// Isi hero tetap server component. Animasi tebasan ada di HeroStage (client).
 export function Hero() {
   const social =
     "inline-block border border-line bg-bg/70 px-4 py-2 hover:border-red hover:text-red";
   return (
-    <section
-      id="top"
-      aria-label="Perkenalan"
-      className="relative isolate overflow-hidden px-5 pb-12 pt-10 sm:pt-16"
-    >
+    <HeroStage>
       <SlashLine />
 
       {/* Teks vertikal Jepang di tepi kanan */}
@@ -70,6 +67,6 @@ export function Hero() {
           <YamiScene />
         </div>
       </div>
-    </section>
+    </HeroStage>
   );
 }

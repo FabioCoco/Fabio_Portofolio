@@ -15,6 +15,9 @@ export function YamiScene() {
           <stop offset="70%" stopColor="#8f1217" stopOpacity="0.6" />
           <stop offset="100%" stopColor="#8f1217" stopOpacity="0.35" />
         </radialGradient>
+        <filter id="aura-blur" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="9" />
+        </filter>
       </defs>
 
       {/* Lingkaran merah redup di belakang karakter */}
@@ -51,6 +54,18 @@ export function YamiScene() {
       </g>
 
       {/* Katana: bilah panjang diagonal, tsuba, gagang */}
+      {/* Aura gelap-merah di sekitar katana (tersembunyi; muncul saat fase charge) */}
+      <path
+        className="hero-aura"
+        d="M266 244 L424 28"
+        stroke="#e5252a"
+        strokeWidth="22"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0"
+        filter="url(#aura-blur)"
+      />
+
       <g id="hero-katana">
         <path d="M266 244 L424 28 L428 34 L272 254 Z" fill="#ece6d8" />
         <path d="M272 254 L424 34" stroke="#9a958a" strokeWidth="1" />

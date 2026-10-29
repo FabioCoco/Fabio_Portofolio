@@ -57,3 +57,20 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Garis tebasan hero: tergambar penuh secara default (reduced-motion / tanpa JS).
+   Saat animasi diizinkan, disembunyikan dulu lalu digambar oleh GSAP. */
+.fx-slash {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+.fx-slash-core {
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-slash {
+    stroke-dashoffset: 1;
+  }
+}
