@@ -1,34 +1,67 @@
-# Black Bulls Portfolio
+# Portfolio Fabio Francisco
 
-Portofolio bertema Black Clover (fan tribute). Lihat `PLAN.md` untuk rencana lengkap dan `CLAUDE.md` untuk aturan proyek.
+Situs portofolio pribadi: profil, project, sertifikat, dan kontak. Dibuat dengan Next.js dan dioptimalkan untuk dibuka cepat di perangkat mobile.
+
+## Teknologi
+
+- Next.js 16 (App Router) dan TypeScript
+- Tailwind CSS v4
+- GSAP dan Lenis untuk animasi dan scroll
+- Tema terang dan gelap, serta mengikuti `prefers-reduced-motion`
+
+## Fitur
+
+- Hero beranimasi dengan siluet SVG buatan sendiri
+- Halaman terpisah untuk project (dengan halaman detail) dan sertifikat
+- Pratinjau sertifikat dalam dialog, dengan tautan verifikasi Credly
+- Command palette (Ctrl+K) untuk berpindah halaman dan membuka tautan
+- Metadata dan gambar Open Graph untuk berbagi tautan
 
 ## Menjalankan
 
 ```bash
 npm install
-npm run dev          # http://localhost:3000
+npm run dev     # http://localhost:3000
+```
+
+Pemeriksaan sebelum deploy:
+
+```bash
 npm run lint
 npx tsc --noEmit
 npm run build
 ```
 
-## Mengisi konten
+## Struktur
 
-Semua konten ada di `content/*.ts` (cari tanda `TODO`):
+| Folder | Isi |
+|---|---|
+| `app/` | Halaman dan layout |
+| `components/` | Komponen UI, section, dan hero |
+| `content/` | Data profil, project, sertifikat, dan skill |
+| `lib/` | Helper animasi, scroll, dan preferensi |
+| `public/` | Gambar project, sertifikat, dan foto profil |
+
+## Mengubah konten
+
+Semua teks dan data ada di `content/`, bukan di komponen.
 
 | Data | File | Aset |
 |---|---|---|
-| Profil, kontak, link sosial | `content/profile.ts` | foto di `public/profile/`, CV di `public/cv.pdf` |
-| Project (judul, stack, repo, demo) | `content/projects.ts` | screenshot di `public/projects/<slug>/` |
-| Sertifikat | `content/certificates.ts` | gambar di `public/certificates/` |
+| Profil dan kontak | `content/profile.ts` | Foto di `public/profile/`, CV di `public/cv.pdf` |
+| Project | `content/projects.ts` | Screenshot di `public/projects/<slug>/` |
+| Sertifikat | `content/certificates.ts` | Gambar di `public/certificates/` |
 | Skill | `content/skills.ts` | - |
 
-## Deploy ke Vercel
+Section yang datanya kosong (skill, foto) otomatis tidak ditampilkan.
 
-1. Push repo ke GitHub, lalu import di Vercel (framework terdeteksi otomatis: Next.js).
-2. Tambahkan Environment Variable `NEXT_PUBLIC_SITE_URL` = URL produksi (mis. `https://namaanda.vercel.app`), lalu redeploy.
-3. Opsional: sambungkan custom domain di Settings > Domains.
+## Deploy
 
-## Pengaturan animasi
+1. Push repo ke GitHub lalu import di [Vercel](https://vercel.com).
+2. Tambahkan environment variable `NEXT_PUBLIC_SITE_URL` berisi URL produksi, lalu redeploy.
 
-`lib/motion.ts`: `ENABLE_SMOOTH_SCROLL` mematikan Lenis. Semua animasi otomatis mati saat `prefers-reduced-motion`.
+Scroll halus bisa dimatikan lewat `ENABLE_SMOOTH_SCROLL` di `lib/motion.ts`.
+
+## Catatan
+
+Ilustrasi dan ornamen dibuat sendiri dengan SVG dan CSS. Tema visualnya terinspirasi dari Black Clover sebagai fan tribute; Black Clover © Yuki Tabata / Shueisha, TV Tokyo, Black Clover Project. Situs ini tidak berafiliasi.

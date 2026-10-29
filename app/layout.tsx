@@ -21,7 +21,7 @@ const label = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-// TODO: set NEXT_PUBLIC_SITE_URL ke domain asli (mis. https://namaanda.vercel.app) saat deploy.
+// Isi NEXT_PUBLIC_SITE_URL dengan domain produksi (mis. https://namaanda.vercel.app) saat deploy.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const description = `Portofolio ${profile.name}, mahasiswa ${profile.major}. Project, sertifikat, dan kontak.`;
 

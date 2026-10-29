@@ -27,7 +27,7 @@ const KANJI_BG = `url("data:image/svg+xml,${encodeURIComponent(KANJI_SVG)}")`;
 
 /**
  * Pembungkus hero: menaruh lapisan efek dan menjalankan timeline GSAP
- * idle -> charge -> slash -> split -> aftermath (PLAN.md bagian 6, Tier A).
+ * idle -> charge -> slash -> split -> aftermath.
  * Konten hero (server component) masuk lewat `children`.
  * Tanpa animasi (prefers-reduced-motion) tidak ada yang dijalankan: hero tampil statis
  * dengan garis tebasan sudah tergambar.
@@ -112,7 +112,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
         );
       });
 
-      // Pivot rotasi (koordinat viewBox YamiScene): bahu untuk lengan + katana, pinggul untuk torso.
+      // Pivot rotasi (koordinat viewBox HeroScene): bahu untuk lengan + katana, pinggul untuk torso.
       const SHOULDER = "230 214";
       const HIP = "232 346";
       const arm = q("#hero-arm");

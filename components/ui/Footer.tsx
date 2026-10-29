@@ -8,7 +8,7 @@ export function Footer() {
           © {profile.copyrightYear} {profile.name}. Dibuat dengan Next.js.
         </p>
         <p>
-          Visual dan siluet dibuat sendiri dengan SVG/CSS. {/* TODO: kredit fan art bila ada. */}
+          Visual dan siluet dibuat sendiri dengan SVG/CSS.
         </p>
         <p>
           Fan tribute. Black Clover © Yuki Tabata / Shueisha, TV Tokyo, Black Clover Project. Situs

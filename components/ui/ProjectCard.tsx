@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Project } from "@/content/projects";
 import { Clover } from "@/components/ui/Clover";
 
-// Kartu "member file": bingkai ganda dengan nomor di pojok kiri-atas dan kanan-bawah.
+// Kartu project: bingkai ganda dengan nomor di pojok kiri-atas dan kanan-bawah.
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   const thumb = project.screenshots[0];
   const num = String(index + 1).padStart(2, "0");

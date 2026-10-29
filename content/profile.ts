@@ -1,6 +1,6 @@
 export const profile = {
   name: "Fabio Francisco",
-  copyrightYear: 2026, // TODO: perbarui tiap tahun
+  copyrightYear: 2026, // tahun di footer, perbarui tiap tahun
   tagline: "Membangun solusi teknologi yang rapi dan berguna.",
   summary:
     "Mahasiswa Informatics Engineering di Universitas Tarumanagara yang tertarik pada teknologi dan AI.",

@@ -1,9 +1,9 @@
-// Siluet pendekar original (Tier A) untuk hero. Bukan replika artwork resmi:
+// Siluet pendekar original untuk hero, digambar sendiri dengan SVG (bukan artwork resmi):
 // pendekar berjubah hitam, ikat kepala, katana melengkung, kuda-kuda menebas, mata merah.
 // Menghadap kiri: katana terangkat di belakang kepala, lalu menebas turun ke kiri-bawah
 // (searah garis tebasan hero). Id grup dipakai oleh timeline GSAP di HeroStage:
 // hero-figure > hero-cape, hero-leg-*, hero-torso > hero-arm (lengan + katana + aura), hero-head.
-export function YamiScene() {
+export function HeroScene() {
   return (
     <svg
       viewBox="0 -50 460 650"

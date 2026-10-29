@@ -8,7 +8,7 @@ import { setLenis } from "@/lib/scroll";
 import { ENABLE_SMOOTH_SCROLL, NO_REDUCED_MOTION, REVEAL } from "@/lib/motion";
 
 /**
- * Efek scroll global (Fase 4), tidak merender apa pun:
+ * Efek scroll global, tidak merender apa pun:
  * - reveal elemen `[data-reveal]` saat masuk layar
  * - cahaya kartu yang mengikuti kursor
  * - scroll halus Lenis (opsional, lihat lib/motion.ts)

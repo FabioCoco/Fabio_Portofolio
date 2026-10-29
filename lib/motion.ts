@@ -1,4 +1,4 @@
-// Pengaturan animasi section (Fase 4). Semua dimatikan otomatis saat prefers-reduced-motion.
+// Pengaturan animasi section. Semua dimatikan otomatis saat prefers-reduced-motion.
 
 /** Matikan jika scroll halus (Lenis) terasa mengganggu. */
 export const ENABLE_SMOOTH_SCROLL = true;

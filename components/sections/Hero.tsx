@@ -2,7 +2,7 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { SlashLine } from "@/components/hero/SlashLine";
-import { YamiScene } from "@/components/hero/YamiScene";
+import { HeroScene } from "@/components/hero/HeroScene";
 
 // Isi hero tetap server component. Animasi tebasan ada di HeroStage (client).
 export function Hero() {
@@ -64,7 +64,7 @@ export function Hero() {
         </div>
 
         <div className="mx-auto w-full max-w-sm md:max-w-none">
-          <YamiScene />
+          <HeroScene />
         </div>
       </div>
     </HeroStage>
