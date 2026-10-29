@@ -1,49 +1,74 @@
 import { profile } from "@/content/profile";
+import { SlashLine } from "@/components/hero/SlashLine";
+import { YamiScene } from "@/components/hero/YamiScene";
 
-// Hero sementara: hanya teks. Scene Yami dikerjakan di Fase 2-3.
+// Hero statis (Fase 2). Animasi tebasan dikerjakan di Fase 3.
 export function Hero() {
+  const social =
+    "inline-block border border-line bg-bg/70 px-4 py-2 hover:border-red hover:text-red";
   return (
-    <section id="top" aria-label="Perkenalan" className="px-5 pb-16 pt-14 sm:pt-24">
-      <div className="mx-auto max-w-5xl">
-        <p className="font-label text-xs uppercase tracking-[0.3em] text-muted">
-          FILE 01 / Black Bulls Member File
-        </p>
-        <h1 className="mt-4 font-display text-6xl uppercase leading-[0.95] tracking-wide sm:text-8xl">
-          {profile.name}
-        </h1>
-        <p className="mt-6 max-w-2xl text-xl leading-relaxed">{profile.summary}</p>
-        <p className="mt-6 font-label text-xs uppercase tracking-[0.2em] text-muted">
-          {profile.major} · {profile.university} · {profile.location}
-        </p>
-        <p lang="ja" className="mt-8 font-jp text-2xl font-semibold text-red">
-          {profile.tagline}
-        </p>
-        <p className="font-label text-xs text-muted">{profile.taglineEn}</p>
-        <ul className="mt-8 flex flex-wrap gap-3 font-label text-xs uppercase tracking-[0.15em]">
-          <li>
-            <a
-              href="#work"
-              className="inline-block border border-red bg-red px-4 py-2 text-bone hover:bg-red-deep"
-            >
-              Lihat project
-            </a>
-          </li>
-          <li>
-            <a href={profile.links.github} className="inline-block border border-line px-4 py-2 hover:border-red hover:text-red">
-              GitHub
-            </a>
-          </li>
-          <li>
-            <a href={profile.links.linkedin} className="inline-block border border-line px-4 py-2 hover:border-red hover:text-red">
-              LinkedIn
-            </a>
-          </li>
-          <li>
-            <a href={`mailto:${profile.links.email}`} className="inline-block border border-line px-4 py-2 hover:border-red hover:text-red">
-              Email
-            </a>
-          </li>
-        </ul>
+    <section
+      id="top"
+      aria-label="Perkenalan"
+      className="relative isolate overflow-hidden px-5 pb-12 pt-10 sm:pt-16"
+    >
+      <SlashLine />
+
+      {/* Teks vertikal Jepang di tepi kanan */}
+      <p
+        lang="ja"
+        aria-hidden="true"
+        className="absolute right-3 top-24 z-10 font-jp text-3xl font-black tracking-[0.3em] text-red [writing-mode:vertical-rl] sm:right-6 sm:text-5xl"
+      >
+        闇魔法
+      </p>
+
+      <div className="relative z-10 mx-auto grid max-w-5xl items-center gap-8 pr-10 md:grid-cols-[1.1fr_0.9fr] md:pr-16">
+        <div>
+          <p className="font-label text-xs uppercase tracking-[0.3em] text-muted">
+            FILE 01 / Black Bulls Member File
+          </p>
+          <h1 className="mt-4 font-display text-6xl uppercase leading-[0.95] tracking-wide sm:text-8xl">
+            {profile.name}
+          </h1>
+          <p className="mt-6 max-w-xl text-xl leading-relaxed">{profile.summary}</p>
+          <p className="mt-5 font-label text-xs uppercase tracking-[0.2em] text-muted">
+            {profile.major} · {profile.university} · {profile.location}
+          </p>
+          <p lang="ja" className="mt-8 font-jp text-2xl font-semibold text-red sm:text-3xl">
+            {profile.tagline}
+          </p>
+          <p className="font-label text-xs text-muted">{profile.taglineEn}</p>
+          <ul className="mt-8 flex flex-wrap gap-3 font-label text-xs uppercase tracking-[0.15em]">
+            <li>
+              <a
+                href="#work"
+                className="inline-block border border-red bg-red px-4 py-2 text-bone hover:bg-red-deep"
+              >
+                Lihat project
+              </a>
+            </li>
+            <li>
+              <a href={profile.links.github} className={social}>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href={profile.links.linkedin} className={social}>
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${profile.links.email}`} className={social}>
+                Email
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="mx-auto w-full max-w-sm md:max-w-none">
+          <YamiScene />
+        </div>
       </div>
     </section>
   );
