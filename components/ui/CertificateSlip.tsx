@@ -1,4 +1,5 @@
 import type { Certificate } from "@/content/certificates";
+import { CertificateViewer } from "@/components/ui/CertificateViewer";
 
 function initials(name: string) {
   return name
@@ -48,9 +49,12 @@ export function CertificateSlip({ cert, index }: { cert: Certificate; index: num
               </a>
             ) : null}
             {cert.image ? (
-              <a href={cert.image} className={link}>
-                Lihat gambar
-              </a>
+              <CertificateViewer
+                src={cert.image}
+                title={cert.title}
+                meta={`${cert.issuer} · ${cert.date}`}
+                className={`${link} cursor-pointer`}
+              />
             ) : null}
           </div>
         ) : null}

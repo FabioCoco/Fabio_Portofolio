@@ -17,3 +17,9 @@ export function scrollToId(id: string) {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   el.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
 }
+
+// Kunci scroll halaman saat dialog modal terbuka (Lenis ikut dihentikan).
+export function setScrollLocked(locked: boolean) {
+  if (locked) lenis?.stop();
+  else lenis?.start();
+}

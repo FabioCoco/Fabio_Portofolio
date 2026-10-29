@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "@/lib/gsap";
 
 // Partikel debu deterministik (tanpa Math.random saat render, supaya SSR = klien).
@@ -34,8 +34,6 @@ const KANJI_BG = `url("data:image/svg+xml,${encodeURIComponent(KANJI_SVG)}")`;
  */
 export function HeroStage({ children }: { children: ReactNode }) {
   const root = useRef<HTMLElement>(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
-  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const el = root.current;
@@ -122,12 +120,17 @@ export function HeroStage({ children }: { children: ReactNode }) {
       const figure = q("#hero-figure");
       const glow = q(".fx-slash-glow");
 
-      // Timeline berurutan. restart() mengulang dari state awal (semua di-reset di t=0).
-      const tl = gsap.timeline({
-        onStart: () => setPlaying(true),
-        onComplete: () => setPlaying(false),
-      });
-      tlRef.current = tl;
+      // Timeline berurutan; semua state awal di-reset di t=0.
+      // Dimulai setelah halaman selesai dimuat dan browser idle, supaya tidak memperlambat
+      // render pertama (LCP) dan interaksi awal.
+      const tl = gsap.timeline({ paused: true });
+      const start = () => tl.play();
+      let timer = 0;
+      const onLoad = () => {
+        timer = window.setTimeout(start, 500);
+      };
+      if (document.readyState === "complete") onLoad();
+      else window.addEventListener("load", onLoad, { once: true });
 
       tl.set(slash, { strokeDashoffset: 1 }, 0)
         .set([core, glow], { opacity: 1 }, 0)
@@ -210,7 +213,8 @@ export function HeroStage({ children }: { children: ReactNode }) {
         .to([core, glow], { opacity: 0, duration: 1.0, ease: "power1.out" }, "aftermath+=0.6");
 
       return () => {
-        tlRef.current = null;
+        window.removeEventListener("load", onLoad);
+        window.clearTimeout(timer);
         gap.w = 0;
         applyGap();
       };
@@ -284,15 +288,6 @@ export function HeroStage({ children }: { children: ReactNode }) {
         </div>
         <div data-fx="flash" className="absolute inset-0 bg-white opacity-0" />
       </div>
-
-      <button
-        type="button"
-        onClick={() => tlRef.current?.restart()}
-        disabled={playing}
-        className="absolute bottom-3 right-4 z-30 border border-line bg-bg/80 px-3 py-2 font-label text-[0.7rem] uppercase tracking-[0.15em] text-muted hover:border-red hover:text-accent disabled:cursor-wait disabled:opacity-50 motion-reduce:hidden"
-      >
-        Ulangi tebasan
-      </button>
     </section>
   );
 }

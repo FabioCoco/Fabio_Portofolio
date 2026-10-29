@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Crimson_Pro, JetBrains_Mono, Noto_Serif_JP } from "next/font/google";
+import { Anton, Crimson_Pro, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/content/profile";
 import { Ambient } from "@/components/ui/Ambient";
-import { CommandPalette } from "@/components/ui/CommandPalette";
-import { SlashCursor } from "@/components/ui/SlashCursor";
+import { LazyExtras } from "@/components/ui/LazyExtras";
 
 const display = Anton({
   variable: "--font-display",
@@ -20,14 +19,6 @@ const body = Crimson_Pro({
 const label = JetBrains_Mono({
   variable: "--font-label",
   subsets: ["latin"],
-});
-
-// Font Jepang dipakai hanya untuk teks pendek (tagline, kanji dekoratif),
-// jadi tidak di-preload agar halaman tetap ringan.
-const jp = Noto_Serif_JP({
-  variable: "--font-jp",
-  weight: ["600", "900"],
-  preload: false,
 });
 
 // TODO: set NEXT_PUBLIC_SITE_URL ke domain asli (mis. https://namaanda.vercel.app) saat deploy.
@@ -59,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="id"
       data-theme="light"
       suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${label.variable} ${jp.variable} h-full antialiased`}
+      className={`${display.variable} ${body.variable} ${label.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -73,8 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <Ambient />
         {children}
-        <CommandPalette />
-        <SlashCursor />
+        <LazyExtras />
       </body>
     </html>
   );

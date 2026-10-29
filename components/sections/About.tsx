@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { profile } from "@/content/profile";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -16,7 +15,7 @@ export function About() {
     <section aria-labelledby="about" className="px-5 py-16">
       <div className="mx-auto max-w-5xl">
         <SectionHeading id="about" title="Tentang Saya" subtitle="Profil" />
-        <div className={`grid gap-10 ${profile.photo ? "md:grid-cols-[1fr_16rem]" : ""}`}>
+        <div>
           <div data-reveal className="space-y-8">
             <div className="space-y-4 text-lg leading-relaxed">
               {profile.about.map((para) => (
@@ -82,17 +81,6 @@ export function About() {
             ) : null}
           </div>
 
-          {profile.photo ? (
-            <aside data-reveal>
-              <Image
-                src={profile.photo}
-                alt={`Foto ${profile.name}`}
-                width={256}
-                height={320}
-                className="h-auto w-full border border-line object-cover"
-              />
-            </aside>
-          ) : null}
         </div>
       </div>
     </section>

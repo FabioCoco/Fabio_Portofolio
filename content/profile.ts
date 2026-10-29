@@ -19,8 +19,12 @@ export const profile = {
   ],
   // Opsional: nilai kerja ({ title, text }). Kosongkan untuk menyembunyikan bagian ini.
   values: [] as { title: string; text: string }[],
-  // Taruh foto di public/profile/, mis. "/profile/foto.webp". Kosongkan jika tidak ada.
-  photo: "",
+  // Taruh foto di public/profile/, mis. "/profile/foto.webp". Kosongkan jika tidak ada
+  // (section foto otomatis disembunyikan).
+  photo: "/profile/foto.webp",
+  // Atur crop: titik fokus (x% y%, 50% 20% = tengah-atas) dan zoom (1 = tanpa zoom).
+  photoPosition: "50% 50%",
+  photoZoom: 1,
   links: {
     github: "https://github.com/FabioCoco",
     linkedin: "https://www.linkedin.com/in/fabio-francisco-49454029a/",
