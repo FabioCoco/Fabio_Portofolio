@@ -1,7 +1,4 @@
-# Portfolio Fabio Francisco
-
-Situs portofolio pribadi: profil, project, sertifikat, dan kontak. Dibuat dengan Next.js dan dioptimalkan untuk dibuka cepat di perangkat mobile.
-
+# Portfolio 
 ## Teknologi
 
 - Next.js 16 (App Router) dan TypeScript
@@ -53,14 +50,6 @@ Semua teks dan data ada di `content/`, bukan di komponen.
 | Sertifikat | `content/certificates.ts` | Gambar di `public/certificates/` |
 | Skill | `content/skills.ts` | - |
 
-Section yang datanya kosong (skill, foto) otomatis tidak ditampilkan.
-
-## Deploy
-
-1. Push repo ke GitHub lalu import di [Vercel](https://vercel.com).
-2. Tambahkan environment variable `NEXT_PUBLIC_SITE_URL` berisi URL produksi, lalu redeploy.
-
-Scroll halus bisa dimatikan lewat `ENABLE_SMOOTH_SCROLL` di `lib/motion.ts`.
 
 ## Catatan
 
