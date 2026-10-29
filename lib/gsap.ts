@@ -1,4 +1,8 @@
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Plugin (ScrollTrigger, dll.) didaftarkan di sini saat dibutuhkan di Fase 4.
-export { gsap };
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+export { gsap, ScrollTrigger };

@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Black Bulls Portfolio
 
-## Getting Started
+Portofolio bertema Black Clover (fan tribute). Lihat `PLAN.md` untuk rencana lengkap dan `CLAUDE.md` untuk aturan proyek.
 
-First, run the development server:
+## Menjalankan
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run lint
+npx tsc --noEmit
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Mengisi konten
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Semua konten ada di `content/*.ts` (cari tanda `TODO`):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Data | File | Aset |
+|---|---|---|
+| Profil, kontak, link sosial | `content/profile.ts` | foto di `public/profile/`, CV di `public/cv.pdf` |
+| Project (judul, stack, repo, demo) | `content/projects.ts` | screenshot di `public/projects/<slug>/` |
+| Sertifikat | `content/certificates.ts` | gambar di `public/certificates/` |
+| Skill | `content/skills.ts` | - |
 
-## Learn More
+## Deploy ke Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Push repo ke GitHub, lalu import di Vercel (framework terdeteksi otomatis: Next.js).
+2. Tambahkan Environment Variable `NEXT_PUBLIC_SITE_URL` = URL produksi (mis. `https://namaanda.vercel.app`), lalu redeploy.
+3. Opsional: sambungkan custom domain di Settings > Domains.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pengaturan animasi
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`lib/motion.ts`: `ENABLE_SMOOTH_SCROLL` mematikan Lenis. Semua animasi otomatis mati saat `prefers-reduced-motion`.

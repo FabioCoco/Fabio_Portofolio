@@ -21,6 +21,10 @@ const CRACKS = [
   "M57 55 L63 53 L68 58",
 ];
 
+// Kanji 闇魔法 untuk overlay aftermath, dirender sebagai SVG data-URI.
+const KANJI_SVG = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 100'><text x='150' y='82' text-anchor='middle' font-size='96' font-weight='900' fill='#e5252a' font-family='"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN","Noto Serif CJK JP",serif'>闇魔法</text></svg>`;
+const KANJI_BG = `url("data:image/svg+xml,${encodeURIComponent(KANJI_SVG)}")`;
+
 /**
  * Pembungkus hero: menaruh lapisan efek dan menjalankan timeline GSAP
  * idle -> charge -> slash -> split -> aftermath (PLAN.md bagian 6, Tier A).
@@ -68,11 +72,11 @@ export function HeroStage({ children }: { children: ReactNode }) {
         edgeR.setAttribute("opacity", "1");
       };
 
-      // 1. IDLE: jubah bergoyang, tubuh bernapas, debu melayang (berulang terus).
+      // 1. IDLE: jubah bergoyang, badan bernapas, debu melayang (berulang terus).
       gsap.to(q("#hero-cape"), {
-        rotation: -3,
-        skewY: 2,
-        svgOrigin: "214 240",
+        rotation: -3.5,
+        skewY: 2.5,
+        svgOrigin: "240 200",
         duration: 2.2,
         ease: "sine.inOut",
         yoyo: true,
@@ -81,6 +85,14 @@ export function HeroStage({ children }: { children: ReactNode }) {
       gsap.to(q("#hero-figure"), {
         y: 3,
         duration: 1.8,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1,
+      });
+      gsap.to(q("#hero-head"), {
+        rotation: 1.5,
+        svgOrigin: "200 210",
+        duration: 2.6,
         ease: "sine.inOut",
         yoyo: true,
         repeat: -1,
@@ -102,6 +114,14 @@ export function HeroStage({ children }: { children: ReactNode }) {
         );
       });
 
+      // Pivot rotasi (koordinat viewBox YamiScene): bahu untuk lengan + katana, pinggul untuk torso.
+      const SHOULDER = "230 214";
+      const HIP = "232 346";
+      const arm = q("#hero-arm");
+      const torso = q("#hero-torso");
+      const figure = q("#hero-figure");
+      const glow = q(".fx-slash-glow");
+
       // Timeline berurutan. restart() mengulang dari state awal (semua di-reset di t=0).
       const tl = gsap.timeline({
         onStart: () => setPlaying(true),
@@ -110,11 +130,13 @@ export function HeroStage({ children }: { children: ReactNode }) {
       tlRef.current = tl;
 
       tl.set(slash, { strokeDashoffset: 1 }, 0)
-        .set(core, { opacity: 1 }, 0)
+        .set([core, glow], { opacity: 1 }, 0)
         .set(q("[data-fx=vignette]"), { opacity: 0 }, 0)
         .set(q("[data-fx=flash]"), { opacity: 0 }, 0)
         .set(q(".hero-aura"), { opacity: 0 }, 0)
-        .set(q("#hero-katana"), { rotation: 0, svgOrigin: "266 250" }, 0)
+        .set(arm, { rotation: 0, svgOrigin: SHOULDER }, 0)
+        .set(torso, { rotation: 0, svgOrigin: HIP }, 0)
+        .set(figure, { x: 0 }, 0)
         .set(q("[data-fx=crack]"), { strokeDashoffset: 1, opacity: 1 }, 0)
         .set(q("[data-fx=kanji]"), { opacity: 0 }, 0)
         .call(() => {
@@ -122,50 +144,55 @@ export function HeroStage({ children }: { children: ReactNode }) {
           applyGap();
         }, [], 0);
 
-      // 1. IDLE (jeda singkat sebelum charge)
-      tl.addLabel("charge", 1);
+      // 2. CHARGE: katana ditarik ke belakang, badan merunduk, aura menebal, vignette menutup.
+      tl.addLabel("charge", 0.9)
+        .to(q(".hero-aura"), { opacity: 0.95, duration: 0.9, ease: "power2.in" }, "charge")
+        .to(q("[data-fx=vignette]"), { opacity: 0.85, duration: 0.9, ease: "power2.in" }, "charge")
+        .to(arm, { rotation: 16, svgOrigin: SHOULDER, duration: 0.9, ease: "power2.in" }, "charge")
+        .to(torso, { rotation: 5, svgOrigin: HIP, duration: 0.9, ease: "power2.in" }, "charge")
+        .to(figure, { x: 12, duration: 0.9, ease: "power2.in" }, "charge");
 
-      // 2. CHARGE: aura menebal, vignette menutup, katana ditarik ke belakang.
-      tl.to(q(".hero-aura"), { opacity: 0.9, duration: 1.1, ease: "power2.in" }, "charge")
-        .to(q("[data-fx=vignette]"), { opacity: 0.85, duration: 1.1, ease: "power2.in" }, "charge")
-        .to(q("#hero-katana"), { rotation: -14, duration: 1.1, ease: "power2.in" }, "charge")
-        .to(q("#hero-figure"), { x: -8, duration: 1.1, ease: "power2.in" }, "charge");
-
-      // 3. SLASH: tebasan cepat, flash, layar bergetar 150 ms.
-      tl.addLabel("slash", ">")
-        .to(q("#hero-katana"), { rotation: 38, duration: 0.12, ease: "power4.in" }, "slash")
-        .to(q("#hero-figure"), { x: 14, duration: 0.12, ease: "power4.in" }, "slash")
-        .to(slash, { strokeDashoffset: 0, duration: 0.18, ease: "power4.in" }, "slash")
+      // 3. SLASH: setelah jeda singkat (antisipasi), katana menyapu turun ke kiri-bawah,
+      // garis tebasan tergambar searah ayunan, flash, layar bergetar ~210 ms.
+      tl.addLabel("slash", "charge+=1.1")
+        .to(arm, { rotation: -172, svgOrigin: SHOULDER, duration: 0.16, ease: "power3.in" }, "slash")
+        .to(torso, { rotation: -9, svgOrigin: HIP, duration: 0.16, ease: "power3.in" }, "slash")
+        .to(figure, { x: -22, duration: 0.16, ease: "power3.in" }, "slash")
+        .to(slash, { strokeDashoffset: 0, duration: 0.14, ease: "none" }, "slash+=0.04")
         .fromTo(
           q("[data-fx=flash]"),
           { opacity: 0.9 },
           { opacity: 0, duration: 0.3, ease: "power2.out", immediateRender: false },
-          "slash+=0.12",
+          "slash+=0.14",
         )
         .to(
           shake,
           {
             keyframes: [
-              { x: -7, y: 3, duration: 0.03 },
-              { x: 6, y: -4, duration: 0.03 },
-              { x: -4, y: 3, duration: 0.03 },
-              { x: 3, y: -2, duration: 0.03 },
-              { x: 0, y: 0, duration: 0.03 },
+              { x: -10, y: 5, duration: 0.035 },
+              { x: 9, y: -6, duration: 0.035 },
+              { x: -7, y: 4, duration: 0.035 },
+              { x: 5, y: -3, duration: 0.035 },
+              { x: -3, y: 2, duration: 0.035 },
+              { x: 0, y: 0, duration: 0.035 },
             ],
           },
-          "slash+=0.12",
+          "slash+=0.14",
         );
 
-      // 4. SPLIT: layar terbelah sepanjang garis diagonal, melebar tipis, lalu menutup.
+      // 4. SPLIT: layar terbelah sepanjang garis diagonal, melebar, lalu menutup.
+      // Pendekar bertahan di pose akhir tebasan (follow-through) sebelum kembali ke posisi awal.
       tl.addLabel("split", "slash+=0.3")
-        .to(gap, { w: 3.2, duration: 0.25, ease: "power3.out", onUpdate: applyGap }, "split")
+        .to(gap, { w: 3.6, duration: 0.25, ease: "power3.out", onUpdate: applyGap }, "split")
         .to(gap, { w: 0, duration: 0.55, ease: "power2.inOut", onUpdate: applyGap }, "split+=0.45")
-        .to(q("#hero-katana"), { rotation: 0, duration: 0.6, ease: "power2.out" }, "split")
-        .to(q("#hero-figure"), { x: 0, duration: 0.6, ease: "power2.out" }, "split")
+        .to(arm, { rotation: 0, svgOrigin: SHOULDER, duration: 1.1, ease: "power2.inOut" }, "split+=0.5")
+        .to(torso, { rotation: 0, svgOrigin: HIP, duration: 1.1, ease: "power2.inOut" }, "split+=0.5")
+        .to(figure, { x: 0, duration: 1.1, ease: "power2.inOut" }, "split+=0.5")
         .to(q("[data-fx=vignette]"), { opacity: 0, duration: 0.9, ease: "power1.out" }, "split")
         .to(q(".hero-aura"), { opacity: 0, duration: 0.9, ease: "power1.out" }, "split");
 
-      // 5. AFTERMATH: retakan gelap dan teks 闇魔法 muncul lalu memudar.
+      // 5. AFTERMATH: retakan gelap dan teks 闇魔法 muncul lalu memudar. Garis tebasan
+      // meredup ke keadaan diam yang tipis supaya teks hero tetap nyaman dibaca.
       tl.addLabel("aftermath", "split+=0.5")
         .to(
           q("[data-fx=crack]"),
@@ -180,7 +207,8 @@ export function HeroStage({ children }: { children: ReactNode }) {
         )
         .to(q("[data-fx=kanji]"), { opacity: 0, duration: 1.2, ease: "power1.in" }, "aftermath+=1")
         .to(q("[data-fx=crack]"), { opacity: 0, duration: 1.2, ease: "power1.in" }, "aftermath+=1")
-        .to(core, { opacity: 0.6, duration: 1, ease: "power1.out" }, "aftermath+=1");
+        .to(core, { opacity: 0.3, duration: 1.2, ease: "power1.out" }, "aftermath+=0.8")
+        .to(glow, { opacity: 0.5, duration: 1.2, ease: "power1.out" }, "aftermath+=0.8");
 
       return () => {
         tlRef.current = null;
@@ -246,22 +274,23 @@ export function HeroStage({ children }: { children: ReactNode }) {
           ))}
         </svg>
         <div className="absolute inset-0 grid place-items-center overflow-hidden">
-          <p
+          {/* Kanji sebagai background data-URI (bukan teks/gambar yang dihitung LCP) supaya
+              kemunculannya di akhir animasi tidak menggeser LCP halaman. */}
+          <div
             data-fx="kanji"
-            lang="ja"
-            className="font-jp text-[34vw] font-black leading-none text-red opacity-0 sm:text-[22vw]"
-          >
-            闇魔法
-          </p>
+            aria-hidden="true"
+            className="aspect-[3/1] w-[92vw] max-w-4xl bg-contain bg-center bg-no-repeat opacity-0 sm:w-[64vw]"
+            style={{ backgroundImage: KANJI_BG }}
+          />
         </div>
-        <div data-fx="flash" className="absolute inset-0 bg-bone opacity-0" />
+        <div data-fx="flash" className="absolute inset-0 bg-white opacity-0" />
       </div>
 
       <button
         type="button"
         onClick={() => tlRef.current?.restart()}
         disabled={playing}
-        className="absolute bottom-3 right-4 z-30 border border-line bg-bg/80 px-3 py-2 font-label text-[0.7rem] uppercase tracking-[0.15em] text-muted hover:border-red hover:text-red disabled:cursor-wait disabled:opacity-50 motion-reduce:hidden"
+        className="absolute bottom-3 right-4 z-30 border border-line bg-bg/80 px-3 py-2 font-label text-[0.7rem] uppercase tracking-[0.15em] text-muted hover:border-red hover:text-accent disabled:cursor-wait disabled:opacity-50 motion-reduce:hidden"
       >
         Ulangi tebasan
       </button>

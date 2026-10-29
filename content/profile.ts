@@ -1,29 +1,31 @@
-// TODO: ganti semua nilai di bawah dengan data asli.
 export const profile = {
-  name: "TODO Nama Lengkap",
+  name: "Fabio Francisco",
   copyrightYear: 2026, // TODO: perbarui tiap tahun
   tagline: "限界を、斬り開け",
   taglineEn: "Cut through your limits.",
   summary:
-    "TODO: satu kalimat tentang diri Anda, mis. mahasiswa Informatics Engineering yang fokus pada ...",
-  university: "TODO Nama Universitas",
+    "Mahasiswa Informatics Engineering di Universitas Tarumanagara yang tertarik pada teknologi dan AI.",
+  university: "Universitas Tarumanagara",
   major: "Informatics Engineering",
-  year: "TODO Angkatan / semester",
+  // Semester sekarang dari total semester. Kosongkan (undefined) untuk menyembunyikan kartu.
+  semester: 5 as number | undefined,
+  totalSemester: 8,
+  // IPK. Kosongkan (undefined) untuk menyembunyikan kartu.
+  gpa: 3.75 as number | undefined,
+  intake: "2024", // angkatan
   location: "Jakarta, Indonesia",
   about: [
-    "TODO: paragraf 1, cerita singkat tentang Anda dan bagaimana Anda mulai di bidang ini.",
-    "TODO: paragraf 2, apa yang sedang Anda pelajari atau cari saat ini.",
+    "Saya mahasiswa Teknik Informatika angkatan 2024 yang memiliki ketertarikan di bidang teknologi dan AI.",
+    "Saat ini saya sedang mendalami bahasa Mandarin dan MongoDB.",
   ],
-  values: [
-    { title: "Kerja keras", text: "TODO: contoh kebiasaan kerja Anda." },
-    { title: "Pantang menyerah", text: "TODO: contoh saat Anda bertahan menyelesaikan masalah sulit." },
-  ],
+  // Opsional: nilai kerja ({ title, text }). Kosongkan untuk menyembunyikan bagian ini.
+  values: [] as { title: string; text: string }[],
   // Taruh foto di public/profile/, mis. "/profile/foto.webp". Kosongkan jika tidak ada.
   photo: "",
   links: {
-    github: "https://github.com/TODO",
-    linkedin: "https://www.linkedin.com/in/TODO",
-    email: "todo@example.com",
+    github: "https://github.com/FabioCoco",
+    linkedin: "https://www.linkedin.com/in/fabio-francisco-49454029a/",
+    email: "fabiofrans.work@gmail.com",
     // Taruh CV di public/cv.pdf lalu isi "/cv.pdf". Kosongkan jika tidak ada.
     cv: "",
   },

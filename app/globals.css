@@ -7,8 +7,26 @@
   --line: #2a2a2e;
   --red: #e5252a;
   --red-deep: #8f1217;
+  --accent: #f2494d; /* merah untuk teks/tautan: kontras AA di bg dan surface */
   --bone: #ece6d8;
   --muted: #9a958a;
+}
+
+/* Tema terang (opsional). Night adalah default. Nama token tetap; "bone" = warna teks utama. */
+:root[data-theme="light"] {
+  --bg: #f3eee2;
+  --surface: #e9e2d2;
+  --line: #cfc7b3;
+  --red: #b3121a;
+  --red-deep: #8f1217;
+  --accent: #b3121a;
+  --bone: #16110f;
+  --muted: #5a554b;
+  color-scheme: light;
+}
+
+:root {
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -17,6 +35,7 @@
   --color-line: var(--line);
   --color-red: var(--red);
   --color-red-deep: var(--red-deep);
+  --color-accent: var(--accent);
   --color-bone: var(--bone);
   --color-muted: var(--muted);
 
@@ -39,7 +58,7 @@ body {
 
 ::selection {
   background: var(--red);
-  color: var(--bone);
+  color: #fff;
 }
 
 :focus-visible {
@@ -65,12 +84,62 @@ body {
   stroke-dashoffset: 0;
 }
 
+/* Keadaan diam (setelah animasi / reduced-motion): tipis agar teks hero tetap terbaca */
 .fx-slash-core {
-  opacity: 0.6;
+  opacity: 0.3;
+}
+
+.fx-slash-glow {
+  opacity: 0.5;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .fx-slash {
     stroke-dashoffset: 1;
   }
+}
+
+/* Garis pada pemisah diagonal antar section (digambar saat scroll bila animasi diizinkan) */
+.fx-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fx-draw {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* Hover kartu project/sertifikat: garis tebasan merah menyapu diagonal kartu */
+.slash-card {
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.slash-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top left,
+    transparent calc(50% - 1px),
+    var(--red) calc(50% - 1px),
+    var(--red) calc(50% + 1px),
+    transparent calc(50% + 1px)
+  );
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.slash-card:hover,
+.slash-card:focus-within {
+  border-color: var(--red-deep);
+}
+
+.slash-card:hover::after,
+.slash-card:focus-within::after {
+  clip-path: inset(0 0 0 0);
 }

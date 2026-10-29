@@ -11,7 +11,7 @@ export function SlashLine() {
     >
       <path
         id="slash-glow"
-        className="fx-slash"
+        className="fx-slash fx-slash-glow"
         d="M104 -4 L-4 104"
         pathLength={1}
         stroke="#e5252a"
@@ -21,10 +21,9 @@ export function SlashLine() {
       />
       <path
         id="slash-core"
-        className="fx-slash fx-slash-core"
+        className="fx-slash fx-slash-core stroke-bone"
         d="M104 -4 L-4 104"
         pathLength={1}
-        stroke="#ece6d8"
         strokeWidth="0.3"
         fill="none"
       />
