@@ -49,6 +49,24 @@ export function ScrollEffects() {
           }),
       });
 
+      // Pop-up: elemen [data-pop] membesar dengan sedikit memantul saat masuk layar.
+      const pops = gsap.utils.toArray<HTMLElement>("[data-pop]");
+      gsap.set(pops, { opacity: 0, scale: 0.7, y: 30, rotate: -4 });
+      ScrollTrigger.batch(pops, {
+        start: "top 85%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotate: 0,
+            duration: 1,
+            ease: "back.out(1.6)",
+            overwrite: true,
+          }),
+      });
+
       // Cahaya kartu mengikuti kursor (diatur lewat variabel CSS --mx/--my).
       const onMove = (e: PointerEvent) => {
         const card = (e.target as Element | null)?.closest<HTMLElement>(".fx-card");

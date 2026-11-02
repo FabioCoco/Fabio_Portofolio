@@ -21,7 +21,7 @@ export function Hero() {
         闇魔法
       </p>
 
-      <div className="relative z-10 mx-auto grid max-w-5xl items-center gap-8 pr-10 md:grid-cols-[1.1fr_0.9fr] md:pr-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-5xl items-center gap-8 pr-10 md:grid-cols-[1.1fr_0.9fr] md:pr-16">
         <div>
           <p className="font-label text-xs uppercase tracking-[0.3em] text-muted">
             {`Portofolio · ${profile.copyrightYear}`}

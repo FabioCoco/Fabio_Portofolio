@@ -228,7 +228,7 @@ export function HeroStage({ children }: { children: ReactNode }) {
       ref={root}
       id="top"
       aria-label="Perkenalan"
-      className="relative isolate overflow-hidden px-5 pb-12 pt-10 sm:pt-16"
+      className="relative isolate flex min-h-[calc(100svh-4rem)] flex-col justify-center overflow-hidden px-5 pb-16 pt-10 sm:pt-16"
     >
       {/* Bidang gelap + tepi merah yang terlihat lewat celah belahan (di bawah konten) */}
       <svg

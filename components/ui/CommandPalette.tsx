@@ -21,8 +21,8 @@ type Command = { id: string; group: string; label: string; run: () => void };
 // Section di beranda (scroll)
 const SECTIONS = [
   { id: "top", label: "Beranda" },
-  { id: "fokus", label: "Fokus belajar (Mandarin & MongoDB)" },
   { id: "about", label: "Tentang saya" },
+  { id: "fokus", label: "Fokus belajar (Mandarin & MongoDB)" },
   ...(skills.length > 0 ? [{ id: "skills", label: "Keahlian" }] : []),
   { id: "contact", label: "Kontak" },
 ];

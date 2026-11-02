@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/content/projects";
 import { Nav } from "@/components/ui/Nav";
 import { Footer } from "@/components/ui/Footer";
+import { Slideshow } from "@/components/ui/Slideshow";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -75,23 +75,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           </div>
 
           {project.screenshots.length > 0 ? (
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2">
-              {project.screenshots.map((src, i) => (
-                <li
-                  key={src}
-                  className="relative aspect-video border border-line bg-surface first:sm:col-span-2"
-                >
-                  <Image
-                    src={src}
-                    alt={`Screenshot ${i + 1} dari ${project.title}`}
-                    fill
-                    sizes="(min-width: 768px) 48rem, 100vw"
-                    quality={85}
-                    className="object-cover object-top"
-                  />
-                </li>
-              ))}
-            </ul>
+            <Slideshow images={project.screenshots} title={project.title} />
           ) : null}
 
           <div className="mt-10 space-y-8">

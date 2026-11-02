@@ -29,7 +29,6 @@ export const projects: Project[] = [
       "React 19",
       "Vite",
       "Tailwind CSS 4",
-      "Zustand",
       "Node.js",
       "Express",
       "MongoDB Atlas",
@@ -60,7 +59,7 @@ export const projects: Project[] = [
     year: "2026",
     demo: "",
     repo: "https://github.com/FabioCoco/Belajar_Mandarin",
-    screenshots: ["/projects/panda-belajar-mandarin/1.webp", "/projects/panda-belajar-mandarin/2.webp", "/projects/panda-belajar-mandarin/3.webp", "/projects/panda-belajar-mandarin/4.webp"],
+    screenshots: ["/projects/panda-belajar-mandarin/beranda.webp", "/projects/panda-belajar-mandarin/belajar.webp", "/projects/panda-belajar-mandarin/kuis.webp", "/projects/panda-belajar-mandarin/progress.webp"],
     problem:
       "Menghafal kosakata Mandarin membutuhkan latihan berulang yang terstruktur dan kemajuan yang bisa dipantau, sementara saya sendiri merasa kesulitan belajar tanpa alat seperti itu.",
     solution:

@@ -211,3 +211,52 @@ body {
     animation: none;
   }
 }
+
+/* Foto profil: mengambang pelan, cincin putus-putus berputar, lingkaran aksen berdenyut,
+   bingkai merah bergeser saat hover. Semua animasi mati saat reduced-motion. */
+.fx-portrait {
+  animation: portrait-float 7s ease-in-out infinite;
+}
+
+.fx-portrait-ring {
+  animation: portrait-spin 40s linear infinite;
+}
+
+.fx-portrait-dot {
+  animation: portrait-pulse 4.5s ease-in-out infinite;
+}
+
+.fx-portrait-frame {
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fx-portrait:hover .fx-portrait-frame {
+  transform: translate(1.25rem, 1.25rem);
+}
+
+.fx-portrait-photo {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.fx-portrait:hover .fx-portrait-photo {
+  transform: scale(1.05);
+}
+
+@keyframes portrait-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes portrait-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes portrait-pulse {
+  50% {
+    transform: scale(1.18);
+    opacity: 0.55;
+  }
+}

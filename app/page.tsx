@@ -4,7 +4,6 @@ import { ScrollEffects } from "@/components/ui/ScrollEffects";
 import { Hero } from "@/components/sections/Hero";
 import { Work } from "@/components/sections/Work";
 import { Portrait } from "@/components/sections/Portrait";
-import { About } from "@/components/sections/About";
 import { skills } from "@/content/skills";
 import { Focus } from "@/components/sections/Focus";
 import { Skills } from "@/components/sections/Skills";
@@ -18,9 +17,8 @@ export default function Home() {
       <Nav />
       <main id="main" className="flex-1">
         <Hero />
-        <Work />
         <Portrait />
-        <About />
+        <Work />
         <Focus />
         {skills.length > 0 ? <Skills /> : null}
         <Certificates />
