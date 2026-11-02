@@ -39,18 +39,6 @@ npm run build
 | `lib/` | Helper animasi, scroll, dan preferensi |
 | `public/` | Gambar project, sertifikat, dan foto profil |
 
-## Mengubah konten
-
-Semua teks dan data ada di `content/`, bukan di komponen.
-
-| Data | File | Aset |
-|---|---|---|
-| Profil dan kontak | `content/profile.ts` | Foto di `public/profile/`, CV di `public/cv.pdf` |
-| Project | `content/projects.ts` | Screenshot di `public/projects/<slug>/` |
-| Sertifikat | `content/certificates.ts` | Gambar di `public/certificates/` |
-| Skill | `content/skills.ts` | - |
-
-
 ## Catatan
 
 Ilustrasi dan ornamen dibuat sendiri dengan SVG dan CSS. Tema visualnya terinspirasi dari Black Clover sebagai fan tribute; Black Clover © Yuki Tabata / Shueisha, TV Tokyo, Black Clover Project. Situs ini tidak berafiliasi.
