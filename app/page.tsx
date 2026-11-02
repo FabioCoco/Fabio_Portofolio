@@ -8,6 +8,7 @@ import { skills } from "@/content/skills";
 import { Focus } from "@/components/sections/Focus";
 import { Skills } from "@/components/sections/Skills";
 import { Certificates } from "@/components/sections/Certificates";
+import { SectionRail } from "@/components/ui/SectionRail";
 import { Contact } from "@/components/sections/Contact";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
     <>
       <ScrollEffects />
       <Nav />
+      <SectionRail />
       <main id="main" className="flex-1">
         <Hero />
         <Portrait />

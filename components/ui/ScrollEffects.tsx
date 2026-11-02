@@ -63,6 +63,7 @@ export function ScrollEffects() {
             rotate: 0,
             duration: 1,
             ease: "back.out(1.6)",
+            clearProps: "transform,opacity",
             overwrite: true,
           }),
       });

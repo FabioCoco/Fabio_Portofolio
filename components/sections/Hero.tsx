@@ -2,12 +2,13 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { SlashLine } from "@/components/hero/SlashLine";
+import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/ui/Icons";
 import { HeroScene } from "@/components/hero/HeroScene";
 
 // Isi hero tetap server component. Animasi tebasan ada di HeroStage (client).
 export function Hero() {
   const social =
-    "inline-block border border-line bg-bg/70 px-4 py-2 hover:border-red hover:text-accent";
+    "grid h-10 w-10 place-items-center border border-line bg-bg/70 hover:border-red hover:text-accent";
   return (
     <HeroStage>
       <SlashLine />
@@ -16,7 +17,7 @@ export function Hero() {
       <p
         lang="ja"
         aria-hidden="true"
-        className="absolute right-3 top-24 z-10 font-jp text-3xl font-black tracking-[0.3em] text-accent [writing-mode:vertical-rl] sm:right-6 sm:text-5xl"
+        className="absolute right-3 top-24 z-10 font-jp text-3xl font-black tracking-[0.3em] text-accent [writing-mode:vertical-rl] sm:right-6 sm:text-5xl lg:right-20"
       >
         闇魔法
       </p>
@@ -46,18 +47,18 @@ export function Hero() {
               </Link>
             </li>
             <li>
-              <a href={profile.links.github} className={social}>
-                GitHub
+              <a href={profile.links.github} className={social} aria-label="GitHub" title="GitHub">
+                <GithubIcon />
               </a>
             </li>
             <li>
-              <a href={profile.links.linkedin} className={social}>
-                LinkedIn
+              <a href={profile.links.linkedin} className={social} aria-label="LinkedIn" title="LinkedIn">
+                <LinkedinIcon />
               </a>
             </li>
             <li>
-              <a href={`mailto:${profile.links.email}`} className={social}>
-                Email
+              <a href={`mailto:${profile.links.email}`} className={social} aria-label="Email" title="Email">
+                <MailIcon />
               </a>
             </li>
           </ul>

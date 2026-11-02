@@ -1,10 +1,12 @@
 import { profile } from "@/content/profile";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/ui/Icons";
 import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
 
 export function Contact() {
   const { github, linkedin, email, cv } = profile.links;
   const link = "border border-line px-4 py-2 hover:border-red hover:text-accent";
+  const icon = "grid h-10 w-10 place-items-center border border-line hover:border-red hover:text-accent";
   return (
     <section aria-labelledby="contact" className="px-5 py-16">
       <div className="mx-auto max-w-5xl">
@@ -18,18 +20,18 @@ export function Contact() {
             <CopyEmailButton email={email} />
           </li>
           <li>
-            <a href={`mailto:${email}`} className={`inline-block ${link}`}>
-              Kirim email
+            <a href={`mailto:${email}`} className={icon} aria-label="Kirim email" title="Kirim email">
+              <MailIcon />
             </a>
           </li>
           <li>
-            <a href={github} className={`inline-block ${link}`}>
-              GitHub
+            <a href={github} className={icon} aria-label="GitHub" title="GitHub">
+              <GithubIcon />
             </a>
           </li>
           <li>
-            <a href={linkedin} className={`inline-block ${link}`}>
-              LinkedIn
+            <a href={linkedin} className={icon} aria-label="LinkedIn" title="LinkedIn">
+              <LinkedinIcon />
             </a>
           </li>
           {cv ? (

@@ -215,6 +215,7 @@ body {
 /* Foto profil: mengambang pelan, cincin putus-putus berputar, lingkaran aksen berdenyut,
    bingkai merah bergeser saat hover. Semua animasi mati saat reduced-motion. */
 .fx-portrait {
+  will-change: transform;
   animation: portrait-float 7s ease-in-out infinite;
 }
 
@@ -244,7 +245,7 @@ body {
 
 @keyframes portrait-float {
   50% {
-    transform: translateY(-10px);
+    transform: translate3d(0, -10px, 0);
   }
 }
 
@@ -258,5 +259,108 @@ body {
   50% {
     transform: scale(1.18);
     opacity: 0.55;
+  }
+}
+
+/* Scrollbar bertema: jalur bergaris, pegangan gradasi merah dengan ikon semanggi di tengah. */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--red) var(--bg);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 1px solid var(--line);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--red-deep);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ece6d8'%3E%3Ccircle cx='12' cy='6' r='4.5'/%3E%3Ccircle cx='12' cy='18' r='4.5'/%3E%3Ccircle cx='6' cy='12' r='4.5'/%3E%3Ccircle cx='18' cy='12' r='4.5'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, var(--red) 0%, var(--red-deep) 100%);
+  background-repeat: no-repeat;
+  background-position: center, center;
+  background-size: 8px 8px, 100% 100%;
+  background-clip: padding-box;
+  border: 2px solid var(--bg);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ece6d8'%3E%3Ccircle cx='12' cy='6' r='4.5'/%3E%3Ccircle cx='12' cy='18' r='4.5'/%3E%3Ccircle cx='6' cy='12' r='4.5'/%3E%3Ccircle cx='18' cy='12' r='4.5'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, var(--accent) 0%, var(--red) 100%);
+}
+
+/* Garis progres scroll di tepi atas layar: tumbuh mengikuti posisi halaman, ujungnya menyala.
+   Memakai scroll-driven animation (Chrome/Edge); browser lain tidak menampilkannya. */
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 80;
+      height: 3px;
+      pointer-events: none;
+      transform-origin: left;
+      background: linear-gradient(90deg, var(--red-deep), var(--red), var(--accent));
+      box-shadow: 0 0 10px 1px color-mix(in srgb, var(--red) 80%, transparent);
+      animation: scroll-grow linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes scroll-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Penanda rel section: denyut cahaya merah di belakang semanggi */
+.rail-pulse {
+  opacity: 0.5;
+  animation: rail-pulse 2.4s ease-out infinite;
+}
+
+@keyframes rail-pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+/* Katana penanda rel: berayun dari miring lalu menetap saat pindah section */
+.rail-swing {
+  animation: rail-swing 0.7s cubic-bezier(0.3, 1.5, 0.5, 1) both;
+}
+
+@keyframes rail-swing {
+  from {
+    transform: rotate(-32deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }

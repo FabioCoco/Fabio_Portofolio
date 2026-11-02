@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { MoonIcon, SunIcon } from "@/components/ui/Icons";
 import { getTheme, setTheme, subscribe, type Theme } from "@/lib/prefs";
 
 export function ThemeToggle() {
@@ -12,9 +13,10 @@ export function ThemeToggle() {
       type="button"
       onClick={() => setTheme(next)}
       aria-label={`Tema ${theme === "dark" ? "malam" : "terang"}, ganti ke ${next === "light" ? "terang" : "malam"}`}
-      className="border border-line px-2 py-1 font-label text-[0.7rem] uppercase tracking-[0.15em] text-muted hover:border-red hover:text-accent"
+      title={`Ganti ke tema ${next === "light" ? "terang" : "malam"}`}
+      className="grid h-8 w-8 place-items-center border border-line text-muted hover:border-red hover:text-accent"
     >
-      {theme === "dark" ? "Malam" : "Terang"}
+      {theme === "dark" ? <MoonIcon /> : <SunIcon />}
     </button>
   );
 }

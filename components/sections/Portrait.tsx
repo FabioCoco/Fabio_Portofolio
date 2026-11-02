@@ -46,7 +46,8 @@ export function Portrait() {
                     src={profile.photo}
                     alt={`Foto ${profile.name}`}
                     fill
-                    sizes="18rem"
+                    sizes="(min-width: 768px) 576px, 288px"
+                    quality={90}
                     className="object-cover"
                     style={{
                       objectPosition: profile.photoPosition,

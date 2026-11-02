@@ -63,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Lewati ke konten
         </a>
         <Ambient />
+        <div aria-hidden="true" className="scroll-progress" />
         {children}
         <LazyExtras />
       </body>
