@@ -1,11 +1,11 @@
 import { profile } from "@/content/profile";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/ui/Icons";
+import { CvMenu } from "@/components/ui/CvMenu";
 import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
 
 export function Contact() {
-  const { github, linkedin, email, cv } = profile.links;
-  const link = "border border-line px-4 py-2 hover:border-red hover:text-accent";
+  const { github, linkedin, email } = profile.links;
   const icon = "grid h-10 w-10 place-items-center border border-line hover:border-red hover:text-accent";
   return (
     <section aria-labelledby="contact" className="px-5 py-16">
@@ -34,13 +34,9 @@ export function Contact() {
               <LinkedinIcon />
             </a>
           </li>
-          {cv ? (
-            <li>
-              <a href={cv} className={`inline-block ${link}`}>
-                Unduh CV
-              </a>
-            </li>
-          ) : null}
+          <li>
+            <CvMenu />
+          </li>
         </ul>
       </div>
     </section>

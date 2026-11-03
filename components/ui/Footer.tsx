@@ -1,5 +1,4 @@
 import { profile } from "@/content/profile";
-
 export function Footer() {
   return (
     <footer className="border-t border-line px-5 py-10">

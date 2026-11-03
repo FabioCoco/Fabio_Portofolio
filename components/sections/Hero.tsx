@@ -3,6 +3,7 @@ import { profile } from "@/content/profile";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { SlashLine } from "@/components/hero/SlashLine";
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/components/ui/Icons";
+import { CvMenu } from "@/components/ui/CvMenu";
 import { HeroScene } from "@/components/hero/HeroScene";
 
 // Isi hero tetap server component. Animasi tebasan ada di HeroStage (client).
@@ -60,6 +61,9 @@ export function Hero() {
               <a href={`mailto:${profile.links.email}`} className={social} aria-label="Email" title="Email">
                 <MailIcon />
               </a>
+            </li>
+            <li>
+              <CvMenu />
             </li>
           </ul>
         </div>
